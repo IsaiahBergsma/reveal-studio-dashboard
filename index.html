@@ -1,7 +1,17 @@
 
 <style>
+:root {
+  --color-background-primary: #1C1C1E;
+  --color-background-secondary: #2C2C2E;
+  --color-text-primary: #F2F2F7;
+  --color-text-secondary: #8E8E93;
+  --color-border-tertiary: #3A3A3C;
+  --color-border-secondary: #48484A;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+}
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: var(--font-sans); }
+body { font-family: var(--font-sans); background: #111113; }
 .dash { padding: 1.5rem 0; }
 .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
 .logo { font-size: 18px; font-weight: 500; color: var(--color-text-primary); letter-spacing: 0.04em; }
@@ -14,16 +24,16 @@ body { font-family: var(--font-sans); }
 .metric-sub { font-size: 11px; color: var(--color-text-secondary); margin-top: 3px; }
 .metric-sub.up { color: #1D9E75; }
 .main-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
-.card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; }
+.card { background: var(--color-background-primary); border: 1px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; }
 .card-title { font-size: 11px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 12px; }
 .client-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 0.5px solid var(--color-border-tertiary); }
 .client-row:last-child { border-bottom: none; }
 .client-name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
 .client-type { font-size: 11px; color: var(--color-text-secondary); }
 .status-pill { font-size: 11px; padding: 3px 9px; border-radius: 20px; font-weight: 500; }
-.status-active { background: #E1F5EE; color: #0F6E56; }
-.status-review { background: #FAEEDA; color: #854F0B; }
-.status-overdue { background: #FCEBEB; color: #A32D2D; }
+.status-active { background: #0D3B2E; color: #30D158; }
+.status-review { background: #3D2A00; color: #FFD60A; }
+.status-overdue { background: #3A1212; color: #FF453A; }
 .task-row { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 0.5px solid var(--color-border-tertiary); cursor: pointer; }
 .task-row:last-child { border-bottom: none; }
 .task-check { width: 16px; height: 16px; border-radius: 4px; border: 1.5px solid var(--color-border-secondary); flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
@@ -185,27 +195,27 @@ body { font-family: var(--font-sans); }
       <div class="card-title">Quick links</div>
       <div class="link-grid">
         <a class="quick-link" href="https://drive.google.com" target="_blank">
-          <div class="link-icon" style="background:#E6F1FB;color:#185FA5">GD</div>
+          <div class="link-icon" style="background:#0D2A42;color:#4DA3F5">GD</div>
           <span class="link-label">Google Drive</span>
         </a>
         <a class="quick-link" href="https://notion.so" target="_blank">
-          <div class="link-icon" style="background:#F1EFE8;color:#5F5E5A">No</div>
+          <div class="link-icon" style="background:#2A2A26;color:#C8C7C2">No</div>
           <span class="link-label">Notion</span>
         </a>
         <a class="quick-link" href="https://frame.io" target="_blank">
-          <div class="link-icon" style="background:#FBEAF0;color:#993556">Fr</div>
+          <div class="link-icon" style="background:#3A1428;color:#D97AAD">Fr</div>
           <span class="link-label">Frame.io</span>
         </a>
         <a class="quick-link" href="https://www.instagram.com" target="_blank">
-          <div class="link-icon" style="background:#FAECE7;color:#993C1D">Ig</div>
+          <div class="link-icon" style="background:#3A1A0D;color:#E8835A">Ig</div>
           <span class="link-label">Instagram</span>
         </a>
         <a class="quick-link" href="https://wave.com" target="_blank">
-          <div class="link-icon" style="background:#EAF3DE;color:#3B6D11">Wv</div>
+          <div class="link-icon" style="background:#1A2E0A;color:#7DC44A">Wv</div>
           <span class="link-label">Wave (invoicing)</span>
         </a>
         <a class="quick-link" href="https://cal.google.com" target="_blank">
-          <div class="link-icon" style="background:#E1F5EE;color:#0F6E56">Ca</div>
+          <div class="link-icon" style="background:#0D3B2E;color:#30D158">Ca</div>
           <span class="link-label">Calendar</span>
         </a>
       </div>
