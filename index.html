@@ -1,12 +1,11 @@
-
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 :root {
   --red: #E03131;
   --red-dark: #9B1C1C;
-  --red-glow: rgba(224, 49, 49, 0.18);
-  --red-border: rgba(224, 49, 49, 0.22);
+  --red-glow: rgba(224,49,49,0.18);
+  --red-border: rgba(224,49,49,0.22);
   --bg: #080809;
   --surface: #0F0F13;
   --surface-2: #161619;
@@ -37,530 +36,295 @@ body {
   min-height: 100vh;
 }
 
-/* ── LAYOUT ─────────────────────────────── */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border-width: 0;
+}
+
 .dash { padding: 1.75rem 0 3rem; }
 
-/* ── HEADER ─────────────────────────────── */
+/* ── HEADER ──────────────────────────────────── */
 .top-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border);
 }
-
-.logo-lockup {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-}
-
+.logo-lockup { display: flex; align-items: center; gap: 13px; }
 .logo-mark {
-  width: 38px;
-  height: 38px;
-  background: var(--red);
-  border-radius: 7px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  width: 38px; height: 38px; background: var(--red); border-radius: 7px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   box-shadow: 0 0 0 1px rgba(224,49,49,0.4), 0 0 28px rgba(224,49,49,0.3), 0 4px 12px rgba(0,0,0,0.5);
 }
-
-.logo-mark svg {
-  width: 17px;
-  height: 17px;
-}
-
+.logo-mark svg { width: 17px; height: 17px; }
 .logo-text { display: flex; flex-direction: column; gap: 2px; }
-
 .logo-primary {
-  font-size: 16px;
-  font-weight: 900;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text);
-  line-height: 1;
+  font-size: 16px; font-weight: 900; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--text); line-height: 1;
 }
-
 .logo-divider {
-  display: inline-block;
-  width: 1px;
-  height: 12px;
-  background: var(--border-strong);
-  margin: 0 8px;
-  vertical-align: middle;
+  display: inline-block; width: 1px; height: 12px;
+  background: var(--border-strong); margin: 0 8px; vertical-align: middle;
 }
-
 .logo-accent { color: var(--red); }
-
 .logo-sub {
-  font-size: 9px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--text-3);
-  font-weight: 600;
+  font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--text-3); font-weight: 600;
 }
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
+.header-right { display: flex; align-items: center; gap: 10px; }
 .live-badge {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--green);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  background: var(--green-dim);
-  border: 1px solid var(--green-border);
-  padding: 5px 10px;
-  border-radius: 3px;
+  display: flex; align-items: center; gap: 6px;
+  font-size: 10px; font-weight: 700; color: var(--green); letter-spacing: 0.1em;
+  text-transform: uppercase; background: var(--green-dim);
+  border: 1px solid var(--green-border); padding: 5px 10px; border-radius: 3px;
 }
-
 .live-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 8px rgba(34,197,94,0.7);
-  animation: pulse 2s ease-in-out infinite;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--green);
+  box-shadow: 0 0 8px rgba(34,197,94,0.7); animation: pulse 2s ease-in-out infinite;
 }
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 .date-pill {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-2);
-  background: var(--surface-2);
-  padding: 6px 14px;
-  border-radius: 4px;
-  border: 1px solid var(--border-mid);
-  letter-spacing: 0.03em;
+  font-size: 11px; font-weight: 600; color: var(--text-2); background: var(--surface-2);
+  padding: 6px 14px; border-radius: 4px; border: 1px solid var(--border-mid); letter-spacing: 0.03em;
 }
 
-/* ── METRICS ─────────────────────────────── */
+/* ── METRICS ─────────────────────────────────── */
 .metrics {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  margin-bottom: 10px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 10px;
 }
-
 .metric {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 20px 20px 18px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.5), 0 8px 24px rgba(0,0,0,0.3);
-  transition: border-color 0.2s;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+  padding: 20px 20px 18px; position: relative; overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5), 0 8px 24px rgba(0,0,0,0.3); transition: border-color 0.2s;
 }
-
 .metric:hover { border-color: var(--border-mid); }
-
 .metric-accent {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--red);
-  box-shadow: 0 0 12px rgba(224,49,49,0.4);
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--red); box-shadow: 0 0 12px rgba(224,49,49,0.4);
 }
-
 .metric-label {
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--text-3);
-  text-transform: uppercase;
-  letter-spacing: 0.11em;
-  margin-bottom: 12px;
+  font-size: 10px; font-weight: 700; color: var(--text-3);
+  text-transform: uppercase; letter-spacing: 0.11em; margin-bottom: 12px;
 }
-
-.metric-value {
-  font-size: 30px;
-  font-weight: 800;
-  color: var(--text);
-  line-height: 1;
-  letter-spacing: -0.03em;
-}
-
-.metric-sub {
-  font-size: 11px;
-  color: var(--text-3);
-  margin-top: 9px;
-  font-weight: 500;
-}
-
+.metric-value { font-size: 30px; font-weight: 800; color: var(--text); line-height: 1; letter-spacing: -0.03em; }
+.metric-sub { font-size: 11px; color: var(--text-3); margin-top: 9px; font-weight: 500; }
 .metric-sub.up { color: var(--green); }
 .metric-sub.warn { color: var(--amber); }
 
-/* ── CARD ─────────────────────────────────── */
+/* ── CARD BASE ───────────────────────────────── */
 .card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
   padding: 20px 22px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.4), 0 16px 40px rgba(0,0,0,0.25);
 }
-
 .card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border);
 }
+.card-title { font-size: 10px; font-weight: 700; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.13em; }
 
-.card-title {
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--text-3);
-  text-transform: uppercase;
-  letter-spacing: 0.13em;
-}
+/* ── WORKSPACE GRID ──────────────────────────── */
+.workspace-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
 
-.card-badge {
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--text-3);
-  background: var(--surface-2);
-  padding: 2px 8px;
-  border-radius: 3px;
-  border: 1px solid var(--border);
-  letter-spacing: 0.04em;
-  font-variant-numeric: tabular-nums;
-}
-
-/* ── GRIDS ─────────────────────────────────── */
-.main-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.bottom-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
-/* ── CLIENT ROWS ─────────────────────────── */
-.client-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.client-row:last-child { border-bottom: none; }
-
-.client-name {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text);
-  letter-spacing: -0.01em;
-}
-
-.client-type {
-  font-size: 11px;
-  color: var(--text-3);
-  margin-top: 2px;
-  font-weight: 400;
-}
-
-/* ── STATUS PILLS ─────────────────────────── */
-.status-pill {
-  font-size: 9.5px;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 4px 9px;
-  border-radius: 3px;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-
-.status-active {
-  background: var(--green-dim);
-  color: var(--green);
-  border: 1px solid var(--green-border);
-}
-
-.status-review {
-  background: var(--amber-dim);
-  color: var(--amber);
-  border: 1px solid var(--amber-border);
-}
-
-.status-overdue {
-  background: var(--red-glow);
-  color: var(--red);
-  border: 1px solid var(--red-border);
-}
-
-/* ── TASKS ─────────────────────────────────── */
-.task-row {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  padding: 9px 0;
-  border-bottom: 1px solid var(--border);
-  cursor: pointer;
-  transition: opacity 0.15s;
-}
-
-.task-row:last-child { border-bottom: none; }
-.task-row:hover { opacity: 0.75; }
-
-.task-check {
-  width: 17px;
-  height: 17px;
-  border-radius: 4px;
-  border: 1.5px solid var(--border-strong);
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.15s;
-}
-
-.task-check.done {
-  background: var(--red);
-  border-color: var(--red);
-  box-shadow: 0 0 10px rgba(224,49,49,0.35);
-}
-
-.task-check.done::after {
-  content: '';
-  display: block;
-  width: 8px;
-  height: 5px;
-  border-left: 1.5px solid white;
-  border-bottom: 1.5px solid white;
-  transform: rotate(-45deg) translateY(-1px);
-}
-
-.task-text {
-  font-size: 13px;
-  color: var(--text);
-  flex: 1;
-  font-weight: 500;
-}
-
-.task-text.done {
-  text-decoration: line-through;
-  color: var(--text-3);
-}
-
-.task-due {
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--text-3);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.task-due.urgent { color: var(--red); }
-
-/* ── DEADLINES ─────────────────────────────── */
-.deadline-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.deadline-row:last-child { border-bottom: none; }
-
-.deadline-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.deadline-info { flex: 1; min-width: 0; }
-.deadline-name {
-  font-size: 13px;
-  color: var(--text);
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  white-space: nowrap;
+/* ── CLIENT WORKSPACE ────────────────────────── */
+.client-workspace {
+  background: var(--surface); border: 1px solid rgba(224,49,49,0.14); border-radius: 8px;
   overflow: hidden;
-  text-overflow: ellipsis;
+  box-shadow: 0 0 0 1px rgba(224,49,49,0.05), 0 2px 8px rgba(0,0,0,0.5), 0 20px 50px rgba(0,0,0,0.3);
 }
 
-.deadline-client { font-size: 11px; color: var(--text-3); margin-top: 2px; }
+.workspace-header {
+  background: var(--surface-2); border-bottom: 2px solid var(--red);
+  padding: 18px 22px; display: flex; align-items: center;
+  justify-content: space-between; gap: 14px; position: relative; overflow: hidden;
+}
+.workspace-header::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(224,49,49,0.08) 0%, transparent 55%);
+  pointer-events: none;
+}
+.workspace-header::after {
+  content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 2px;
+  background: var(--red); box-shadow: 0 0 22px 3px rgba(224,49,49,0.45);
+}
+.workspace-header-inner { position: relative; }
+.workspace-tag {
+  font-size: 8.5px; font-weight: 800; letter-spacing: 0.24em;
+  color: var(--red); text-transform: uppercase; margin-bottom: 5px;
+}
+.workspace-name {
+  font-size: 17px; font-weight: 900; color: var(--text);
+  letter-spacing: 0.05em; line-height: 1; text-transform: uppercase;
+}
+.workspace-meta {
+  font-size: 9.5px; color: var(--text-3); letter-spacing: 0.1em;
+  margin-top: 5px; text-transform: uppercase; font-weight: 600;
+}
+.add-ws-btn {
+  font-size: 10px; font-weight: 800; color: var(--red);
+  background: var(--red-glow); border: 1px solid var(--red-border);
+  border-radius: 4px; padding: 7px 13px; cursor: pointer; letter-spacing: 0.08em;
+  text-transform: uppercase; font-family: inherit; white-space: nowrap; flex-shrink: 0;
+  transition: background 0.15s, box-shadow 0.15s; position: relative;
+}
+.add-ws-btn:hover { background: rgba(224,49,49,0.28); box-shadow: 0 0 14px rgba(224,49,49,0.22); }
 
-.deadline-date {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--text-2);
-  letter-spacing: 0.04em;
-  white-space: nowrap;
+.workspace-section { padding: 16px 22px; border-bottom: 1px solid var(--border); }
+.workspace-section:last-child { border-bottom: none; }
+.section-label {
+  font-size: 8.5px; font-weight: 800; color: var(--text-3);
+  letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px;
 }
 
-/* ── REVENUE ─────────────────────────────────── */
-.revenue-bar-wrap { display: flex; flex-direction: column; gap: 12px; }
+/* ── EPISODE TABLE ───────────────────────────── */
+.ep-table-wrap { overflow-x: auto; }
+.ep-table { width: 100%; border-collapse: collapse; min-width: 500px; }
+.ep-table th {
+  font-size: 8px; font-weight: 800; color: var(--text-3); letter-spacing: 0.13em;
+  text-transform: uppercase; padding: 0 5px 8px; white-space: nowrap;
+  border-bottom: 1px solid var(--border); text-align: center;
+}
+.ep-table th:first-child,
+.ep-table th:nth-child(2) { text-align: left; }
+.ep-table td {
+  padding: 7px 5px; border-bottom: 1px solid var(--border);
+  text-align: center; vertical-align: middle;
+}
+.ep-table td:first-child,
+.ep-table td:nth-child(2) { text-align: left; }
+.ep-table tbody tr:last-child td { border-bottom: none; }
+.ep-table tbody tr:hover { background: rgba(255,255,255,0.015); }
 
-.rev-month { display: flex; align-items: center; gap: 10px; }
+.ep-name-input {
+  font-size: 12px; font-weight: 600; color: var(--text);
+  background: transparent; border: none; border-bottom: 1px solid transparent;
+  padding: 3px 2px; width: 110px; font-family: inherit; transition: border-color 0.15s;
+}
+.ep-name-input:focus { outline: none; border-bottom-color: var(--red); }
+.ep-name-input::placeholder { color: var(--text-3); font-weight: 400; }
 
-.rev-label {
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--text-3);
-  width: 26px;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
+.stage-select {
+  font-size: 10px; font-weight: 700; padding: 4px 7px; border-radius: 3px;
+  border: 1px solid var(--border-mid); background: var(--surface-3);
+  font-family: inherit; cursor: pointer; width: 152px; -webkit-appearance: none;
+  transition: border-color 0.15s;
+}
+.stage-select:focus { outline: none; border-color: var(--red-border); }
+.stage-select option { background: #1E1E24; color: var(--text); }
+
+.ep-cb { width: 14px; height: 14px; accent-color: var(--red); cursor: pointer; display: block; margin: 0 auto; }
+
+.delete-row-btn {
+  width: 22px; height: 22px; display: flex; align-items: center; justify-content: center;
+  font-size: 16px; line-height: 1; color: var(--text-3); background: transparent;
+  border: none; cursor: pointer; border-radius: 3px; font-family: inherit; padding: 0;
+  transition: color 0.15s, background 0.15s;
+}
+.delete-row-btn:hover { color: var(--red); background: var(--red-glow); }
+
+/* ── ANALYTICS GRID ──────────────────────────── */
+.analytics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.analytics-field label {
+  display: block; font-size: 8px; font-weight: 800; color: var(--text-3);
+  letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 5px;
+}
+.analytics-field input {
+  width: 100%; font-size: 14px; font-weight: 800; color: var(--text);
+  background: var(--surface-2); border: 1px solid var(--border-mid); border-radius: 4px;
+  padding: 7px 10px; font-family: inherit; font-variant-numeric: tabular-nums;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.analytics-field input:focus { outline: none; border-color: var(--red); box-shadow: 0 0 0 2px var(--red-glow); }
+.analytics-field input::placeholder { color: var(--text-3); font-weight: 400; font-size: 12px; }
+
+/* ── WORKSPACE NOTES ─────────────────────────── */
+.workspace-notes {
+  width: 100%; font-size: 12px; color: var(--text); background: var(--surface-2);
+  border: 1px solid var(--border-mid); border-radius: 5px; padding: 10px 12px;
+  font-family: inherit; resize: vertical; min-height: 70px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.workspace-notes:focus { outline: none; border-color: var(--red); box-shadow: 0 0 0 2px var(--red-glow); }
+.workspace-notes::placeholder { color: var(--text-3); }
+
+/* ── VIDEO ROWS (CENTER CUP) ─────────────────── */
+.video-row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 0; border-bottom: 1px solid var(--border);
+}
+.video-row:last-child { border-bottom: none; }
+.video-title-input {
+  flex: 1; min-width: 0; font-size: 12px; font-weight: 600; color: var(--text);
+  background: var(--surface-2); border: 1px solid var(--border-mid); border-radius: 4px;
+  padding: 7px 10px; font-family: inherit; transition: border-color 0.15s;
+}
+.video-title-input:focus { outline: none; border-color: var(--red); }
+.video-title-input::placeholder { color: var(--text-3); font-weight: 400; }
+.video-date-input {
+  font-size: 11px; font-weight: 600; color: var(--text-2); background: var(--surface-2);
+  border: 1px solid var(--border-mid); border-radius: 4px; padding: 7px 10px;
+  font-family: inherit; width: 130px; flex-shrink: 0; color-scheme: dark; transition: border-color 0.15s;
+}
+.video-date-input:focus { outline: none; border-color: var(--red); }
+.cc-stage-select {
+  font-size: 10px; font-weight: 700; padding: 7px 8px; border-radius: 4px;
+  border: 1px solid var(--border-mid); background: var(--surface-3);
+  font-family: inherit; cursor: pointer; width: 155px; flex-shrink: 0;
+  -webkit-appearance: none; transition: border-color 0.15s;
+}
+.cc-stage-select:focus { outline: none; border-color: var(--red-border); }
+.cc-stage-select option { background: #1E1E24; color: var(--text); }
+
+/* ── EMPTY STATE ─────────────────────────────── */
+.empty-state {
+  padding: 22px; text-align: center; color: var(--text-3);
+  font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
 }
 
-.rev-bar-bg {
-  flex: 1;
-  height: 14px;
-  background: var(--surface-2);
-  border-radius: 2px;
-  overflow: hidden;
-  border: 1px solid var(--border);
-}
-
-.rev-bar {
-  height: 100%;
-  border-radius: 2px;
-  background: linear-gradient(90deg, var(--red-dark), var(--red));
-  box-shadow: 2px 0 12px rgba(224,49,49,0.4);
-  transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.rev-bar.current { background: linear-gradient(90deg, #B31C1C, var(--red), #FF6B6B); }
-
-.rev-amount {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--text-2);
-  width: 48px;
-  text-align: right;
-  letter-spacing: 0.02em;
-  font-variant-numeric: tabular-nums;
-}
+/* ── BOTTOM GRID ─────────────────────────────── */
+.bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
 /* ── QUICK LINKS ─────────────────────────────── */
-.link-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-}
-
+.link-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .quick-link {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  background: var(--surface-2);
-  border-radius: 6px;
-  border: 1px solid var(--border);
-  cursor: pointer;
-  transition: background 0.15s, border-color 0.15s;
-  text-decoration: none;
+  display: flex; align-items: center; gap: 10px; padding: 10px 12px;
+  background: var(--surface-2); border-radius: 6px; border: 1px solid var(--border);
+  cursor: pointer; transition: background 0.15s, border-color 0.15s; text-decoration: none;
 }
-
-.quick-link:hover {
-  background: var(--surface-3);
-  border-color: var(--border-mid);
-}
-
+.quick-link:hover { background: var(--surface-3); border-color: var(--border-mid); }
 .link-icon {
-  width: 26px;
-  height: 26px;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px;
-  font-weight: 800;
-  flex-shrink: 0;
+  width: 26px; height: 26px; border-radius: 5px; display: flex;
+  align-items: center; justify-content: center; font-size: 10px; font-weight: 800; flex-shrink: 0;
 }
+.link-label { font-size: 12px; color: var(--text); font-weight: 600; }
 
-.link-label {
-  font-size: 12px;
-  color: var(--text);
-  font-weight: 600;
-}
-
-/* ── OUTREACH FORM ─────────────────────────── */
+/* ── OUTREACH FORM ───────────────────────────── */
 .outreach-form { display: flex; flex-direction: column; gap: 8px; }
 .outreach-row { display: flex; gap: 8px; }
-
 .outreach-form input,
 .outreach-form textarea,
 .outreach-form select {
-  font-size: 12px;
-  padding: 9px 12px;
-  border-radius: 5px;
-  border: 1px solid var(--border-mid);
-  background: var(--surface-2);
-  color: var(--text);
-  width: 100%;
-  resize: none;
-  font-family: inherit;
-  transition: border-color 0.15s, box-shadow 0.15s;
-  -webkit-appearance: none;
+  font-size: 12px; padding: 9px 12px; border-radius: 5px;
+  border: 1px solid var(--border-mid); background: var(--surface-2); color: var(--text);
+  width: 100%; resize: none; font-family: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s; -webkit-appearance: none;
 }
-
 .outreach-form input::placeholder,
 .outreach-form textarea::placeholder { color: var(--text-3); }
-
 .outreach-form input:focus,
 .outreach-form textarea:focus,
-.outreach-form select:focus {
-  outline: none;
-  border-color: var(--red);
-  box-shadow: 0 0 0 2px var(--red-glow);
-}
-
+.outreach-form select:focus { outline: none; border-color: var(--red); box-shadow: 0 0 0 2px var(--red-glow); }
 .outreach-form select option { background: #1E1E24; }
-
 .send-btn {
-  background: var(--red);
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  cursor: pointer;
-  align-self: flex-end;
-  font-family: inherit;
+  background: var(--red); color: white; border: none; border-radius: 5px;
+  padding: 10px 20px; font-size: 11px; font-weight: 800; letter-spacing: 0.08em;
+  text-transform: uppercase; cursor: pointer; align-self: flex-end; font-family: inherit;
   transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
   box-shadow: 0 0 20px rgba(224,49,49,0.3);
 }
-
-.send-btn:hover {
-  background: #C22A2A;
-  box-shadow: 0 0 28px rgba(224,49,49,0.5);
-  transform: translateY(-1px);
-}
-
+.send-btn:hover { background: #C22A2A; box-shadow: 0 0 28px rgba(224,49,49,0.5); transform: translateY(-1px); }
 .send-btn:active { transform: translateY(0); }
 </style>
 
-<h2 class="sr-only">The Reveal Studio — agency dashboard showing clients, tasks, deadlines, revenue, and outreach tools</h2>
+<h2 class="sr-only">The Reveal Studio — agency dashboard</h2>
 
 <div class="dash">
 
@@ -608,140 +372,117 @@ body {
     </div>
   </div>
 
-  <!-- ROW 1: CLIENTS + TASKS -->
-  <div class="main-grid">
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">Active Clients</div>
-        <div class="card-badge">5 clients</div>
+  <!-- CLIENT WORKSPACES -->
+  <div class="workspace-grid">
+
+    <!-- THE BIOTECH VOYAGER -->
+    <div class="client-workspace">
+      <div class="workspace-header">
+        <div class="workspace-header-inner">
+          <div class="workspace-tag">Client 01</div>
+          <div class="workspace-name">The Biotech Voyager</div>
+          <div class="workspace-meta">Podcast Production</div>
+        </div>
+        <button class="add-ws-btn" onclick="addEpisode()">+ Add Episode</button>
       </div>
-      <div class="client-row">
-        <div><div class="client-name">Spikeball</div><div class="client-type">Video + Graphics</div></div>
-        <span class="status-pill status-active">Active</span>
+
+      <div class="workspace-section">
+        <div class="section-label">Production Pipeline</div>
+        <div class="ep-table-wrap">
+          <table class="ep-table">
+            <thead>
+              <tr>
+                <th style="width:112px">Episode</th>
+                <th style="width:155px">Stage</th>
+                <th title="Full YouTube Episode">YT EP</th>
+                <th title="Long Form Cuts">LF</th>
+                <th title="YouTube Shorts">SHRT</th>
+                <th title="Instagram">IG</th>
+                <th title="TikTok">TT</th>
+                <th title="LinkedIn">LI</th>
+                <th title="Spotify">SP</th>
+                <th title="Apple Podcasts">AP</th>
+                <th style="width:26px"></th>
+              </tr>
+            </thead>
+            <tbody id="ep-tbody"></tbody>
+          </table>
+        </div>
       </div>
-      <div class="client-row">
-        <div><div class="client-name">Bio 2 Bedside</div><div class="client-type">Monthly Retainer</div></div>
-        <span class="status-pill status-active">Active</span>
+
+      <div class="workspace-section">
+        <div class="section-label">Analytics</div>
+        <div class="analytics-grid">
+          <div class="analytics-field">
+            <label>YouTube Views</label>
+            <input type="text" id="bv-yt-views" placeholder="—" oninput="saveBV()">
+          </div>
+          <div class="analytics-field">
+            <label>YT Subscribers</label>
+            <input type="text" id="bv-yt-subs" placeholder="—" oninput="saveBV()">
+          </div>
+          <div class="analytics-field">
+            <label>Shorts Views</label>
+            <input type="text" id="bv-shorts-views" placeholder="—" oninput="saveBV()">
+          </div>
+          <div class="analytics-field">
+            <label>Instagram Followers</label>
+            <input type="text" id="bv-ig" placeholder="—" oninput="saveBV()">
+          </div>
+          <div class="analytics-field">
+            <label>TikTok Followers</label>
+            <input type="text" id="bv-tiktok" placeholder="—" oninput="saveBV()">
+          </div>
+          <div class="analytics-field">
+            <label>LinkedIn Followers</label>
+            <input type="text" id="bv-linkedin" placeholder="—" oninput="saveBV()">
+          </div>
+          <div class="analytics-field">
+            <label>Spotify Listeners</label>
+            <input type="text" id="bv-spotify" placeholder="—" oninput="saveBV()">
+          </div>
+          <div class="analytics-field">
+            <label>Apple Podcasts</label>
+            <input type="text" id="bv-apple" placeholder="—" oninput="saveBV()">
+          </div>
+        </div>
       </div>
-      <div class="client-row">
-        <div><div class="client-name">Pro Roundnet NA</div><div class="client-type">Events + Branding</div></div>
-        <span class="status-pill status-review">Review</span>
-      </div>
-      <div class="client-row">
-        <div><div class="client-name">London Majors</div><div class="client-type">Photography</div></div>
-        <span class="status-pill status-active">Active</span>
-      </div>
-      <div class="client-row">
-        <div><div class="client-name">Ontario Volleyball</div><div class="client-type">Event Coverage</div></div>
-        <span class="status-pill status-overdue">Overdue</span>
+
+      <div class="workspace-section">
+        <div class="section-label">Notes</div>
+        <textarea class="workspace-notes" id="bv-notes" rows="3"
+          placeholder="Episode context, upcoming guests, campaign notes…"
+          oninput="saveBV()"></textarea>
       </div>
     </div>
 
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">Tasks</div>
-        <div class="card-badge">5 items</div>
+    <!-- CENTER CUP -->
+    <div class="client-workspace">
+      <div class="workspace-header">
+        <div class="workspace-header-inner">
+          <div class="workspace-tag">Client 02</div>
+          <div class="workspace-name">Center Cup</div>
+          <div class="workspace-meta">Ryder Riva — Video Pipeline</div>
+        </div>
+        <button class="add-ws-btn" onclick="addVideo()">+ Add Video</button>
       </div>
-      <div class="task-row" onclick="toggleTask(this)">
-        <div class="task-check"></div>
-        <span class="task-text">Edit Spikeball promo reel</span>
-        <span class="task-due urgent">Today</span>
+
+      <div class="workspace-section">
+        <div class="section-label">Video Pipeline</div>
+        <div id="cc-videos"></div>
       </div>
-      <div class="task-row" onclick="toggleTask(this)">
-        <div class="task-check"></div>
-        <span class="task-text">Send Bio 2 Bedside May deliverables</span>
-        <span class="task-due urgent">May 6</span>
-      </div>
-      <div class="task-row" onclick="toggleTask(this)">
-        <div class="task-check done"></div>
-        <span class="task-text done">Upload NATS Top 24 graphic</span>
-        <span class="task-due">Done</span>
-      </div>
-      <div class="task-row" onclick="toggleTask(this)">
-        <div class="task-check"></div>
-        <span class="task-text">Follow up with Renaux re: shoot date</span>
-        <span class="task-due">May 7</span>
-      </div>
-      <div class="task-row" onclick="toggleTask(this)">
-        <div class="task-check"></div>
-        <span class="task-text">Invoice OVC for April event</span>
-        <span class="task-due urgent">Overdue</span>
+
+      <div class="workspace-section">
+        <div class="section-label">Notes</div>
+        <textarea class="workspace-notes" id="cc-notes" rows="5"
+          placeholder="Client feedback, revision notes, next deliverable…"
+          oninput="saveCC()"></textarea>
       </div>
     </div>
+
   </div>
 
-  <!-- ROW 2: DEADLINES + REVENUE -->
-  <div class="main-grid">
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">Upcoming Deadlines</div>
-        <div class="card-badge">4 active</div>
-      </div>
-      <div class="deadline-row">
-        <div class="deadline-dot" style="background:var(--red);box-shadow:0 0 8px rgba(224,49,49,0.6)"></div>
-        <div class="deadline-info">
-          <div class="deadline-name">Spikeball promo reel</div>
-          <div class="deadline-client">Spikeball</div>
-        </div>
-        <div class="deadline-date">Today</div>
-      </div>
-      <div class="deadline-row">
-        <div class="deadline-dot" style="background:var(--amber)"></div>
-        <div class="deadline-info">
-          <div class="deadline-name">Monthly content package</div>
-          <div class="deadline-client">Bio 2 Bedside</div>
-        </div>
-        <div class="deadline-date">May 6</div>
-      </div>
-      <div class="deadline-row">
-        <div class="deadline-dot" style="background:var(--blue)"></div>
-        <div class="deadline-info">
-          <div class="deadline-name">Brand identity round 2</div>
-          <div class="deadline-client">Renaux</div>
-        </div>
-        <div class="deadline-date">May 10</div>
-      </div>
-      <div class="deadline-row">
-        <div class="deadline-dot" style="background:var(--teal)"></div>
-        <div class="deadline-info">
-          <div class="deadline-name">Tournament coverage edit</div>
-          <div class="deadline-client">Pro Roundnet NA</div>
-        </div>
-        <div class="deadline-date">May 14</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">Revenue — Last 4 Months</div>
-        <div class="card-badge">$8,410 total</div>
-      </div>
-      <div class="revenue-bar-wrap">
-        <div class="rev-month">
-          <div class="rev-label">Feb</div>
-          <div class="rev-bar-bg"><div class="rev-bar" style="width:52%"></div></div>
-          <div class="rev-amount">$1,820</div>
-        </div>
-        <div class="rev-month">
-          <div class="rev-label">Mar</div>
-          <div class="rev-bar-bg"><div class="rev-bar" style="width:62%"></div></div>
-          <div class="rev-amount">$2,160</div>
-        </div>
-        <div class="rev-month">
-          <div class="rev-label">Apr</div>
-          <div class="rev-bar-bg"><div class="rev-bar" style="width:58%"></div></div>
-          <div class="rev-amount">$2,030</div>
-        </div>
-        <div class="rev-month">
-          <div class="rev-label">May</div>
-          <div class="rev-bar-bg"><div class="rev-bar current" style="width:69%"></div></div>
-          <div class="rev-amount" style="color:var(--red)">$2,400</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ROW 3: QUICK LINKS + OUTREACH -->
+  <!-- QUICK LINKS + OUTREACH -->
   <div class="bottom-grid">
     <div class="card">
       <div class="card-header">
@@ -802,23 +543,15 @@ body {
 </div>
 
 <script>
-const d = new Date();
-document.getElementById('today-date').textContent = d.toLocaleDateString('en-CA', {
+// Date pill
+const _d = new Date();
+document.getElementById('today-date').textContent = _d.toLocaleDateString('en-CA', {
   weekday: 'short', month: 'short', day: 'numeric', year: 'numeric'
 });
 
-function toggleTask(row) {
-  const check = row.querySelector('.task-check');
-  const text = row.querySelector('.task-text');
-  const due = row.querySelector('.task-due');
-  const isDone = check.classList.toggle('done');
-  text.classList.toggle('done', isDone);
-  if (isDone) { due.textContent = 'Done'; due.className = 'task-due'; }
-}
-
 function handleOutreach() {
   const name = document.getElementById('out-name').value;
-  const co = document.getElementById('out-co').value;
+  const co   = document.getElementById('out-co').value;
   const type = document.getElementById('out-type').value;
   const note = document.getElementById('out-note').value;
   if (!name && !co) {
@@ -827,4 +560,184 @@ function handleOutreach() {
   }
   sendPrompt('Draft a cold outreach email from Isaiah at The Reveal Studio to ' + (name || 'this contact') + (co ? ' at ' + co : '') + '. Type of work: ' + (type || 'general') + (note ? '. Notes: ' + note : '') + '. Keep it tight, confident, no fluff.');
 }
+
+// ── DATA ──────────────────────────────────────────────────────────────
+const BV_KEY = 'rs_bv_data';
+const CC_KEY = 'rs_cc_data';
+
+const BV_STAGES = [
+  'Recording Scheduled','Live on YouTube','Full Episode Uploaded',
+  'Clips In Progress','Clips Delivered','Posted'
+];
+const BV_CONTENT = [
+  { key: 'fullYT',    label: 'Full YouTube Episode' },
+  { key: 'longForm',  label: 'Long Form Cuts' },
+  { key: 'shorts',    label: 'YouTube Shorts' },
+  { key: 'instagram', label: 'Instagram' },
+  { key: 'tiktok',    label: 'TikTok' },
+  { key: 'linkedin',  label: 'LinkedIn' },
+  { key: 'spotify',   label: 'Spotify' },
+  { key: 'apple',     label: 'Apple Podcasts' }
+];
+const BV_STAGE_COLOR = {
+  'Recording Scheduled':  'var(--text-2)',
+  'Live on YouTube':      'var(--red)',
+  'Full Episode Uploaded':'var(--amber)',
+  'Clips In Progress':    'var(--amber)',
+  'Clips Delivered':      'var(--blue)',
+  'Posted':               'var(--green)'
+};
+
+const CC_STAGES = ['Raw Footage Received','Editing','Review','Revisions','Delivered'];
+const CC_STAGE_COLOR = {
+  'Raw Footage Received': 'var(--text-2)',
+  'Editing':   'var(--amber)',
+  'Review':    'var(--amber)',
+  'Revisions': 'var(--red)',
+  'Delivered': 'var(--green)'
+};
+
+const ANALYTICS_KEYS = ['yt-views','yt-subs','shorts-views','ig','tiktok','linkedin','spotify','apple'];
+
+let bvData = { episodes: [], analytics: {}, notes: '' };
+let ccData = { videos: [], notes: '' };
+
+// ── LOAD ──────────────────────────────────────────────────────────────
+function loadData() {
+  try { const s = localStorage.getItem(BV_KEY); if (s) bvData = JSON.parse(s); } catch(e) {}
+  try { const s = localStorage.getItem(CC_KEY); if (s) ccData = JSON.parse(s); } catch(e) {}
+
+  ANALYTICS_KEYS.forEach(k => {
+    const el = document.getElementById('bv-' + k);
+    if (el) el.value = (bvData.analytics || {})[k] || '';
+  });
+  document.getElementById('bv-notes').value = bvData.notes || '';
+  document.getElementById('cc-notes').value = ccData.notes || '';
+
+  renderEpisodes();
+  renderVideos();
+}
+
+// ── SAVE ──────────────────────────────────────────────────────────────
+function saveBV() {
+  const a = {};
+  ANALYTICS_KEYS.forEach(k => { const el = document.getElementById('bv-' + k); a[k] = el ? el.value : ''; });
+  bvData.analytics = a;
+  bvData.notes = document.getElementById('bv-notes').value;
+  localStorage.setItem(BV_KEY, JSON.stringify(bvData));
+}
+
+function saveCC() {
+  ccData.notes = document.getElementById('cc-notes').value;
+  localStorage.setItem(CC_KEY, JSON.stringify(ccData));
+}
+
+// ── EPISODES ──────────────────────────────────────────────────────────
+function addEpisode() {
+  bvData.episodes.push({
+    id: Date.now(), name: '', stage: 'Recording Scheduled',
+    content: { fullYT:false, longForm:false, shorts:false, instagram:false, tiktok:false, linkedin:false, spotify:false, apple:false }
+  });
+  saveBV();
+  renderEpisodes();
+}
+
+function deleteEpisode(id) {
+  bvData.episodes = bvData.episodes.filter(e => e.id !== id);
+  saveBV(); renderEpisodes();
+}
+
+function updateEpField(id, field, value) {
+  const ep = bvData.episodes.find(e => e.id === id);
+  if (!ep) return;
+  if (field in ep.content) ep.content[field] = value;
+  else ep[field] = value;
+  saveBV();
+  if (field === 'stage') {
+    const sel = document.querySelector('[data-ep-stage="' + id + '"]');
+    if (sel) sel.style.color = BV_STAGE_COLOR[value] || 'var(--text)';
+  }
+}
+
+function renderEpisodes() {
+  const tbody = document.getElementById('ep-tbody');
+  if (!tbody) return;
+  if (!bvData.episodes.length) {
+    tbody.innerHTML = '<tr><td colspan="11" class="empty-state">No episodes yet — hit + Add Episode to start tracking</td></tr>';
+    return;
+  }
+  tbody.innerHTML = bvData.episodes.map(ep => {
+    const stageColor = BV_STAGE_COLOR[ep.stage] || 'var(--text)';
+    const opts = BV_STAGES.map(s =>
+      '<option value="' + s + '"' + (ep.stage === s ? ' selected' : '') + '>' + s + '</option>'
+    ).join('');
+    const cbs = BV_CONTENT.map(c =>
+      '<td><input type="checkbox" class="ep-cb" title="' + c.label + '"' +
+      (ep.content[c.key] ? ' checked' : '') +
+      ' onchange="updateEpField(' + ep.id + ',\'' + c.key + '\',this.checked)"></td>'
+    ).join('');
+    return '<tr>' +
+      '<td><input class="ep-name-input" type="text" placeholder="Ep. title…" value="' + escHtml(ep.name) + '"' +
+      ' oninput="updateEpField(' + ep.id + ',\'name\',this.value)"></td>' +
+      '<td><select class="stage-select" data-ep-stage="' + ep.id + '" style="color:' + stageColor + '"' +
+      ' onchange="updateEpField(' + ep.id + ',\'stage\',this.value)">' + opts + '</select></td>' +
+      cbs +
+      '<td><button class="delete-row-btn" onclick="deleteEpisode(' + ep.id + ')" title="Remove">×</button></td>' +
+    '</tr>';
+  }).join('');
+}
+
+// ── VIDEOS ────────────────────────────────────────────────────────────
+function addVideo() {
+  ccData.videos.push({ id: Date.now(), title: '', dueDate: '', stage: 'Raw Footage Received' });
+  saveCC(); renderVideos();
+}
+
+function deleteVideo(id) {
+  ccData.videos = ccData.videos.filter(v => v.id !== id);
+  saveCC(); renderVideos();
+}
+
+function updateVidField(id, field, value) {
+  const vid = ccData.videos.find(v => v.id === id);
+  if (!vid) return;
+  vid[field] = value;
+  saveCC();
+  if (field === 'stage') {
+    const sel = document.querySelector('[data-vid-stage="' + id + '"]');
+    if (sel) sel.style.color = CC_STAGE_COLOR[value] || 'var(--text)';
+  }
+}
+
+function renderVideos() {
+  const container = document.getElementById('cc-videos');
+  if (!container) return;
+  if (!ccData.videos.length) {
+    container.innerHTML = '<div class="empty-state">No videos yet — hit + Add Video to start tracking</div>';
+    return;
+  }
+  container.innerHTML = ccData.videos.map(vid => {
+    const stageColor = CC_STAGE_COLOR[vid.stage] || 'var(--text)';
+    const opts = CC_STAGES.map(s =>
+      '<option value="' + s + '"' + (vid.stage === s ? ' selected' : '') + '>' + s + '</option>'
+    ).join('');
+    return '<div class="video-row">' +
+      '<input class="video-title-input" type="text" placeholder="Video title…" value="' + escHtml(vid.title) + '"' +
+      ' oninput="updateVidField(' + vid.id + ',\'title\',this.value)">' +
+      '<input class="video-date-input" type="date" value="' + (vid.dueDate || '') + '"' +
+      ' onchange="updateVidField(' + vid.id + ',\'dueDate\',this.value)">' +
+      '<select class="cc-stage-select" data-vid-stage="' + vid.id + '" style="color:' + stageColor + '"' +
+      ' onchange="updateVidField(' + vid.id + ',\'stage\',this.value)">' + opts + '</select>' +
+      '<button class="delete-row-btn" onclick="deleteVideo(' + vid.id + ')" title="Remove">×</button>' +
+    '</div>';
+  }).join('');
+}
+
+// ── UTILS ─────────────────────────────────────────────────────────────
+function escHtml(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+loadData();
 </script>
