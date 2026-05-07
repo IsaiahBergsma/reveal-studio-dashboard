@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Center Cup — The Reveal Studio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="dash">
+
+  <!-- HEADER -->
+  <div class="top-bar">
+    <div class="logo-lockup">
+      <div class="logo-mark">
+        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="5,3 17,10 5,17" fill="white"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <div class="logo-primary">THE REVEAL<span class="logo-divider"></span><span class="logo-accent">STUDIO</span></div>
+        <div class="logo-sub">Creative Production &amp; Branding</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <a class="back-link" href="index.html">← Dashboard</a>
+      <div class="date-pill" id="today-date"></div>
+    </div>
+  </div>
+
+  <!-- CENTER CUP WORKSPACE -->
+  <div class="client-workspace">
+    <div class="workspace-header">
+      <div class="workspace-header-inner">
+        <div class="workspace-tag">Client 02</div>
+        <div class="workspace-name">Center Cup</div>
+        <div class="workspace-meta">Ryder Riva — Video Pipeline</div>
+      </div>
+      <button class="add-ws-btn" onclick="addVideo()">+ Add Video</button>
+    </div>
+
+    <div class="workspace-section">
+      <div class="section-label">Video Pipeline</div>
+      <div id="cc-videos"></div>
+    </div>
+
+    <div class="workspace-section">
+      <div class="section-label">Notes</div>
+      <textarea class="workspace-notes" id="cc-notes" rows="5"
+        placeholder="Client feedback, revision notes, next deliverable…"
+        oninput="saveCC()"></textarea>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const _d = new Date();
+document.getElementById('today-date').textContent = _d.toLocaleDateString('en-CA', {
+  weekday: 'short', month: 'short', day: 'numeric', year: 'numeric'
+});
+
+const CC_KEY = 'rs_cc_data';
+
+const CC_STAGES = ['Raw Footage Received','Editing','Review','Revisions','Delivered'];
+const CC_STAGE_COLOR = {
+  'Raw Footage Received': 'var(--text-2)',
+  'Editing':   'var(--amber)',
+  'Review':    'var(--amber)',
+  'Revisions': 'var(--red)',
+  'Delivered': 'var(--green)'
+};
+
+let ccData = { videos: [], notes: '' };
+
+function loadData() {
+  try { const s = localStorage.getItem(CC_KEY); if (s) ccData = JSON.parse(s); } catch(e) {}
+  document.getElementById('cc-notes').value = ccData.notes || '';
+  renderVideos();
+}
+
+function saveCC() {
+  ccData.notes = document.getElementById('cc-notes').value;
+  localStorage.setItem(CC_KEY, JSON.stringify(ccData));
+}
+
+function addVideo() {
+  ccData.videos.push({ id: Date.now(), title: '', dueDate: '', stage: 'Raw Footage Received' });
+  saveCC(); renderVideos();
+}
+
+function deleteVideo(id) {
+  ccData.videos = ccData.videos.filter(v => v.id !== id);
+  saveCC(); renderVideos();
+}
+
+function updateVidField(id, field, value) {
+  const vid = ccData.videos.find(v => v.id === id);
+  if (!vid) return;
+  vid[field] = value;
+  saveCC();
+  if (field === 'stage') {
+    const sel = document.querySelector('[data-vid-stage="' + id + '"]');
+    if (sel) sel.style.color = CC_STAGE_COLOR[value] || 'var(--text)';
+  }
+}
+
+function renderVideos() {
+  const container = document.getElementById('cc-videos');
+  if (!container) return;
+  if (!ccData.videos.length) {
+    container.innerHTML = '<div class="empty-state">No videos yet — hit + Add Video to start tracking</div>';
+    return;
+  }
+  container.innerHTML = ccData.videos.map(vid => {
+    const stageColor = CC_STAGE_COLOR[vid.stage] || 'var(--text)';
+    const opts = CC_STAGES.map(s =>
+      '<option value="' + s + '"' + (vid.stage === s ? ' selected' : '') + '>' + s + '</option>'
+    ).join('');
+    return '<div class="video-row">' +
+      '<input class="video-title-input" type="text" placeholder="Video title…" value="' + escHtml(vid.title) + '"' +
+      ' oninput="updateVidField(' + vid.id + ',\'title\',this.value)">' +
+      '<input class="video-date-input" type="date" value="' + (vid.dueDate || '') + '"' +
+      ' onchange="updateVidField(' + vid.id + ',\'dueDate\',this.value)">' +
+      '<select class="cc-stage-select" data-vid-stage="' + vid.id + '" style="color:' + stageColor + '"' +
+      ' onchange="updateVidField(' + vid.id + ',\'stage\',this.value)">' + opts + '</select>' +
+      '<button class="delete-row-btn" onclick="deleteVideo(' + vid.id + ')" title="Remove">×</button>' +
+    '</div>';
+  }).join('');
+}
+
+function escHtml(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+loadData();
+</script>
+
+</body>
+</html>

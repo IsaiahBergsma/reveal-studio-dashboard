@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Biotech Voyager — The Reveal Studio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="dash">
+
+  <!-- HEADER -->
+  <div class="top-bar">
+    <div class="logo-lockup">
+      <div class="logo-mark">
+        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="5,3 17,10 5,17" fill="white"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <div class="logo-primary">THE REVEAL<span class="logo-divider"></span><span class="logo-accent">STUDIO</span></div>
+        <div class="logo-sub">Creative Production &amp; Branding</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <a class="back-link" href="index.html">← Dashboard</a>
+      <div class="date-pill" id="today-date"></div>
+    </div>
+  </div>
+
+  <!-- BIOTECH VOYAGER WORKSPACE -->
+  <div class="client-workspace biotech-workspace">
+    <div class="workspace-header">
+      <div class="workspace-header-inner">
+        <div class="workspace-tag">Client 01</div>
+        <div class="workspace-name">The Biotech Voyager</div>
+        <div class="workspace-meta">Podcast Production</div>
+      </div>
+      <button class="add-ws-btn" onclick="addEpisode()">+ Add Episode</button>
+    </div>
+
+    <div class="workspace-section">
+      <div class="section-label">Production Pipeline</div>
+      <div class="ep-table-wrap">
+        <table class="ep-table">
+          <thead>
+            <tr>
+              <th style="width:112px">Episode</th>
+              <th style="width:155px">Stage</th>
+              <th title="Full YouTube Episode">YT EP</th>
+              <th title="Long Form Cuts">LF</th>
+              <th title="YouTube Shorts">SHRT</th>
+              <th title="Instagram">IG</th>
+              <th title="TikTok">TT</th>
+              <th title="LinkedIn">LI</th>
+              <th title="Spotify">SP</th>
+              <th title="Apple Podcasts">AP</th>
+              <th style="width:26px"></th>
+            </tr>
+          </thead>
+          <tbody id="ep-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="workspace-section">
+      <div class="section-label">Analytics</div>
+      <div class="analytics-grid">
+        <div class="analytics-field">
+          <label>YouTube Views</label>
+          <input type="text" id="bv-yt-views" placeholder="—" oninput="saveBV()">
+        </div>
+        <div class="analytics-field">
+          <label>YT Subscribers</label>
+          <input type="text" id="bv-yt-subs" placeholder="—" oninput="saveBV()">
+        </div>
+        <div class="analytics-field">
+          <label>Shorts Views</label>
+          <input type="text" id="bv-shorts-views" placeholder="—" oninput="saveBV()">
+        </div>
+        <div class="analytics-field">
+          <label>Instagram Followers</label>
+          <input type="text" id="bv-ig" placeholder="—" oninput="saveBV()">
+        </div>
+        <div class="analytics-field">
+          <label>TikTok Followers</label>
+          <input type="text" id="bv-tiktok" placeholder="—" oninput="saveBV()">
+        </div>
+        <div class="analytics-field">
+          <label>LinkedIn Followers</label>
+          <input type="text" id="bv-linkedin" placeholder="—" oninput="saveBV()">
+        </div>
+        <div class="analytics-field">
+          <label>Spotify Listeners</label>
+          <input type="text" id="bv-spotify" placeholder="—" oninput="saveBV()">
+        </div>
+        <div class="analytics-field">
+          <label>Apple Podcasts</label>
+          <input type="text" id="bv-apple" placeholder="—" oninput="saveBV()">
+        </div>
+      </div>
+    </div>
+
+    <div class="workspace-section">
+      <div class="section-label">Notes</div>
+      <textarea class="workspace-notes" id="bv-notes" rows="4"
+        placeholder="Episode context, upcoming guests, campaign notes…"
+        oninput="saveBV()"></textarea>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const _d = new Date();
+document.getElementById('today-date').textContent = _d.toLocaleDateString('en-CA', {
+  weekday: 'short', month: 'short', day: 'numeric', year: 'numeric'
+});
+
+const BV_KEY = 'rs_bv_data';
+
+const BV_STAGES = [
+  'Recording Scheduled','Live on YouTube','Full Episode Uploaded',
+  'Clips In Progress','Clips Delivered','Posted'
+];
+const BV_CONTENT = [
+  { key: 'fullYT',    label: 'Full YouTube Episode' },
+  { key: 'longForm',  label: 'Long Form Cuts' },
+  { key: 'shorts',    label: 'YouTube Shorts' },
+  { key: 'instagram', label: 'Instagram' },
+  { key: 'tiktok',    label: 'TikTok' },
+  { key: 'linkedin',  label: 'LinkedIn' },
+  { key: 'spotify',   label: 'Spotify' },
+  { key: 'apple',     label: 'Apple Podcasts' }
+];
+const BV_STAGE_COLOR = {
+  'Recording Scheduled':  'var(--text-2)',
+  'Live on YouTube':      'var(--red)',
+  'Full Episode Uploaded':'var(--amber)',
+  'Clips In Progress':    'var(--amber)',
+  'Clips Delivered':      'var(--blue)',
+  'Posted':               'var(--green)'
+};
+
+const ANALYTICS_KEYS = ['yt-views','yt-subs','shorts-views','ig','tiktok','linkedin','spotify','apple'];
+
+let bvData = { episodes: [], analytics: {}, notes: '' };
+
+function loadData() {
+  try { const s = localStorage.getItem(BV_KEY); if (s) bvData = JSON.parse(s); } catch(e) {}
+  ANALYTICS_KEYS.forEach(k => {
+    const el = document.getElementById('bv-' + k);
+    if (el) el.value = (bvData.analytics || {})[k] || '';
+  });
+  document.getElementById('bv-notes').value = bvData.notes || '';
+  renderEpisodes();
+}
+
+function saveBV() {
+  const a = {};
+  ANALYTICS_KEYS.forEach(k => { const el = document.getElementById('bv-' + k); a[k] = el ? el.value : ''; });
+  bvData.analytics = a;
+  bvData.notes = document.getElementById('bv-notes').value;
+  localStorage.setItem(BV_KEY, JSON.stringify(bvData));
+}
+
+function addEpisode() {
+  bvData.episodes.push({
+    id: Date.now(), name: '', stage: 'Recording Scheduled',
+    content: { fullYT:false, longForm:false, shorts:false, instagram:false, tiktok:false, linkedin:false, spotify:false, apple:false }
+  });
+  saveBV();
+  renderEpisodes();
+}
+
+function deleteEpisode(id) {
+  bvData.episodes = bvData.episodes.filter(e => e.id !== id);
+  saveBV(); renderEpisodes();
+}
+
+function updateEpField(id, field, value) {
+  const ep = bvData.episodes.find(e => e.id === id);
+  if (!ep) return;
+  if (field in ep.content) ep.content[field] = value;
+  else ep[field] = value;
+  saveBV();
+  if (field === 'stage') {
+    const sel = document.querySelector('[data-ep-stage="' + id + '"]');
+    if (sel) sel.style.color = BV_STAGE_COLOR[value] || 'var(--text)';
+  }
+}
+
+function renderEpisodes() {
+  const tbody = document.getElementById('ep-tbody');
+  if (!tbody) return;
+  if (!bvData.episodes.length) {
+    tbody.innerHTML = '<tr><td colspan="11" class="empty-state">No episodes yet — hit + Add Episode to start tracking</td></tr>';
+    return;
+  }
+  tbody.innerHTML = bvData.episodes.map(ep => {
+    const stageColor = BV_STAGE_COLOR[ep.stage] || 'var(--text)';
+    const opts = BV_STAGES.map(s =>
+      '<option value="' + s + '"' + (ep.stage === s ? ' selected' : '') + '>' + s + '</option>'
+    ).join('');
+    const cbs = BV_CONTENT.map(c =>
+      '<td><input type="checkbox" class="ep-cb" title="' + c.label + '"' +
+      (ep.content[c.key] ? ' checked' : '') +
+      ' onchange="updateEpField(' + ep.id + ',\'' + c.key + '\',this.checked)"></td>'
+    ).join('');
+    return '<tr>' +
+      '<td><input class="ep-name-input" type="text" placeholder="Ep. title…" value="' + escHtml(ep.name) + '"' +
+      ' oninput="updateEpField(' + ep.id + ',\'name\',this.value)"></td>' +
+      '<td><select class="stage-select" data-ep-stage="' + ep.id + '" style="color:' + stageColor + '"' +
+      ' onchange="updateEpField(' + ep.id + ',\'stage\',this.value)">' + opts + '</select></td>' +
+      cbs +
+      '<td><button class="delete-row-btn" onclick="deleteEpisode(' + ep.id + ')" title="Remove">×</button></td>' +
+    '</tr>';
+  }).join('');
+}
+
+function escHtml(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+loadData();
+</script>
+
+</body>
+</html>
